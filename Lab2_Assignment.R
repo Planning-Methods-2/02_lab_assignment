@@ -8,7 +8,7 @@
 # 1. [40 points] Open the R file "Lab2_Script.R" comment each line of code with its purpose (with exception of Part 3)
 # 2. [60 points] Open the R file "Lab2_Assignment.R" and answer the questions
 
-#---- Q1. write the code to load the dataset "tract_covariates.csv" located under the "assignment_datasets" folder in your reopository. Create an object called `opportunities` ----
+#---- Q1. write the code to load the dataset "tract_covariates.csv" located under the "datasets" folder in your repository. Create an object called `opportunities` ----
 
 
 #---- Q2. Read and become familiar with the dataset metadata. Next write the code for the following:
