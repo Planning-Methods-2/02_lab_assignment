@@ -20,7 +20,7 @@
 ## ---- Part 1.1: Loading data from R pre-loaded packages ----
 
 data() # shows all preloaded data available in R in the datasets package
-help(package="datasets") # this hleps you to bring a menu of the package functions
+help(package="datasets")
 
 #Let's us the Violent Crime Rates by US State data 
 
@@ -40,7 +40,7 @@ head(usa_arrests)
 # We will use the Building Permits data from the city of San Antonio open data portal
 # Source: https://data.sanantonio.gov/dataset/building-permits/resource/c21106f9-3ef5-4f3a-8604-f992b4db7512
 
-building_permits_sa<-read.csv(file = "datasets/accelaissuedpermitsextract.csv",header = T)
+building_permits_sa<-read.csv("02_lab/datasets/accelaissuedpermitsextract.csv",header = T)
 
 names(building_permits_sa)
 View(building_permits_sa)
@@ -65,9 +65,8 @@ building_permits_sa2 <- read.csv("https://data.sanantonio.gov/dataset/05012dcb-b
 library(tidycensus)
 library(tigris)
 
-help(package="tidycensus")
 
-census_api_key("0d539976d5203a96fa55bbf4421110d4b3db3648") #this is mine, type ?census_api_key to get yours
+#type ?census_api_key to get your Census API for full access.
 
 age10 <- get_decennial(geography = "state", 
                        variables = "P013001", 
@@ -85,7 +84,7 @@ View(bexar_medincome)
 
 
 #---- Part 2: Visualizing the data ----
-install.packages('ggplot2')
+#install.packages('ggplot2')
 
 library(ggplot2)
 
@@ -94,14 +93,12 @@ library(ggplot2)
 ## ---- Part 2.1: Visualizing the 'usa_arrests' data ----
 
 ggplot()
-names(usa_arrests)
+
 #scatter plot - relationship between two continuous variables
 ggplot(data = usa_arrests,aes(x=Assault,y=Murder)) +
   geom_point()
 
 #bar plot - compare levels across observations
-usa_arrests$M2 <- usa_arrests$Murder^2
-
 usa_arrests$state<-rownames(usa_arrests)
 
 ggplot(data = usa_arrests,aes(x=state,y=Murder))+
@@ -117,7 +114,7 @@ ggplot(data = usa_arrests,aes(x=reorder(state,Murder),y=Murder,fill=UrbanPop))+
   coord_flip()
 
 # adding size
-ggplot(data = usa_arrests,aes(x=Assault,y=Murder, size=UrbanPop, color=M2)) +
+ggplot(data = usa_arrests,aes(x=Assault,y=Murder, size=UrbanPop)) +
   geom_point()
 
 
@@ -150,7 +147,7 @@ library(tigris)
 bexar_county <- counties(state = "TX",cb=T)
 bexar_tracts<- tracts(state = "TX", county = "Bexar",cb=T)
 bexar_blockgps <- block_groups(state = "TX", county = "Bexar",cb=T)
-#bexar_blocks <- blocks(state = "TX", county = "Bexar") takes lots of time
+#bexar_blocks <- blocks(state = "TX", county = "Bexar") #takes lots of time
 
 
 # incremental visualization (static)
@@ -175,6 +172,21 @@ ggsave(filename = "02_lab/plots/01_static_map.pdf",plot = p1) #saves the plot as
 
 
 # incremental visualization (interactive)
+
+#install.packages("mapview")
+library(mapview)
+
+mapview(bexar_county)
+
+mapview(bexar_county[bexar_county$NAME=="Bexar",])+
+  mapview(bexar_tracts)
+
+mapview(bexar_county[bexar_county$NAME=="Bexar",])+
+  mapview(bexar_tracts)+
+  mapview(bexar_blockgps)
+
+
+#another way to vizualize this
 leaflet(bexar_county) %>%
   addTiles() %>%
   addPolygons()

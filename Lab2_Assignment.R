@@ -8,7 +8,7 @@
 # 1. [40 points] Open the R file "Lab2_Script.R" comment each line of code with its purpose (with exception of Part 3)
 # 2. [60 points] Open the R file "Lab2_Assignment.R" and answer the questions
 
-#---- Q1. write the code to load the dataset "tract_covariates.csv" located under the "datasets" folder in your repository. Create an object called `opportunities` ----
+#---- Q1. write the code to load the dataset "tract_covariates.csv" located under the "datasets" folder in your repository. Create an object called `opportunities` Use the data.table package to do this. ----
 
 
 #---- Q2. Read and become familiar with the dataset metadata. Next write the code for the following:
@@ -20,13 +20,17 @@
 
 # What is the unit of analysis? 
 
-# Create a new object called `sa_opportunities` that only contains the rows for the San Antonio area (hint: use the `czname` variable). Save the resulting plot as a pdf with the name 'githubusername_p1.pdf'
+# Use the `summary` function to describe the data. What is the variable that provides more interest to you?
 
-# Create a plot that shows the ranking of Annualized job growth rare (ann_avg_job_growth_2004_2013 variable) by census tract (tract variable). Save the resulting plot as a pdf with the name 'githubusername_p2.pdf'
+# Create a new object called `sa_opportunities` that only contains the rows for the San Antonio area (hint: use the `czname` variable). 
+
+
+# Create a plot that shows the ranking of the top 10 census tracts by Annualized job growth rare (`ann_avg_job_growth_2004_2013` variable) by census tract (tract variable). Save the resulting plot as a pdf with the name 'githubusername_p1.pdf' # Hint: for ordering use the `setorderv()` function. 
 
 # Create a plot that shows the relation between the `frac_coll_plus` and the `hhinc_mean2000` variables, what can you hypothesize from this relation? what is the causality direction? Save the resulting plot as a pdf with the name 'githubusername_p3.pdf'
 
-# [Bonus: 10 extra points]: Investigate (on the internet) how to add a title,a subtitle and a caption to your last plot. Create a new plot with that and save it as 'githubusername_p_extra.pdf'
+# Investigate (on the internet) how to add a title,a subtitle and a caption to your last plot. Create a new plot with that and save it as 'githubusername_p_extra.pdf'
+
 
 
 
