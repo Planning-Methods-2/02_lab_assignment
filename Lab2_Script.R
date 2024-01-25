@@ -34,13 +34,13 @@ class(usa_arrests)
 names(usa_arrests)
 dim(usa_arrests)
 head(usa_arrests)
-
+tail(usa_arrests)
 
 ## ---- Part 1.2: Loading data from your computer directory ----
 # We will use the Building Permits data from the city of San Antonio open data portal
 # Source: https://data.sanantonio.gov/dataset/building-permits/resource/c21106f9-3ef5-4f3a-8604-f992b4db7512
 
-building_permits_sa<-read.csv("02_lab/datasets/accelaissuedpermitsextract.csv",header = T)
+building_permits_sa<-read.csv(file = "datasets/accelaissuedpermitsextract.csv",header = T)
 
 names(building_permits_sa)
 View(building_permits_sa)
@@ -62,6 +62,7 @@ building_permits_sa2 <- read.csv("https://data.sanantonio.gov/dataset/05012dcb-b
 ## ---- Part 1.4: Loading data using a package + API ----
 #install.packages("tidycensus")
 #install.packages("tigris")
+help(package="tidycensus")
 library(tidycensus)
 library(tigris)
 
@@ -81,7 +82,7 @@ bexar_medincome <- get_acs(geography = "tract", variables = "B19013_001",
 
 View(bexar_medincome)
 
-
+class(bexar_medincome)
 
 #---- Part 2: Visualizing the data ----
 #install.packages('ggplot2')
@@ -95,8 +96,12 @@ library(ggplot2)
 ggplot()
 
 #scatter plot - relationship between two continuous variables
-ggplot(data = usa_arrests,aes(x=Assault,y=Murder)) +
+ggplot(data = usa_arrests,mapping = aes(x=Assault,y=Murder)) +
   geom_point()
+
+ggplot() +
+  geom_point(data = usa_arrests,mapping = aes(x=Assault,y=Murder))
+
 
 #bar plot - compare levels across observations
 usa_arrests$state<-rownames(usa_arrests)
