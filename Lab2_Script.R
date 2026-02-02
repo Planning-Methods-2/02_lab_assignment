@@ -39,7 +39,7 @@ tail(usa_arrests)
 ## ---- Part 1.2: Loading data from your computer directory ----
 # We will use the Building Permits data from the city of San Antonio open data portal
 # Source: https://data.sanantonio.gov/dataset/building-permits/resource/c21106f9-3ef5-4f3a-8604-f992b4db7512
-
+getwd()
 building_permits_sa<-read.csv(file = "datasets/accelaissuedpermitsextract.csv",header = TRUE)
 
 names(building_permits_sa)
@@ -68,6 +68,7 @@ library(tigris)
 
 
 #type ?census_api_key to get your Census API for full access.
+#usethis::edit_r_environ() # helps you see what API keys you have saved in your R Local Environment
 vars_dec_2010<-load_variables(year = 2010,dataset = "pl")
 age10 <- get_decennial(geography = "state", 
                        variables = "P013001", 
@@ -77,8 +78,9 @@ head(age10)
 
 
 bexar_medincome <- get_acs(geography = "tract", variables = "B19013_001",
-                           state = "TX", county = "Bexar", geometry = TRUE)
+                           state = "TX", county = "Bexar", geometry = F,year=2024)
 
+bexar_map<-tracts(state = "Texas",county = "Bexar",cb = T,year = 2024)
 
 View(bexar_medincome)
 
@@ -171,7 +173,7 @@ p1<-ggplot()+
   geom_sf(data = bexar_blockgps,color='red',fill=NA)+
   geom_sf(data = bexar_tracts,color='black',fill=NA)+
   geom_sf(data = bexar_county[bexar_county$NAME=="Bexar",],color='blue',fill=NA)
-  
+p1
 
 ggsave(filename = "01_static_map.pdf",plot = p1) #saves the plot as a pdf
 

@@ -33,9 +33,16 @@
 
 
 
+#---- Extra Assignment (required only for PhD Students) ----
 
 
+# Q3. Read this article and full paper: https://opportunityinsights.org/paper/cmto/. Answer the following questions:
 
+# Q3.1 What are their main hypothesis and research questions?
+# Q3.2 What is their unit of analysis?
+# Q3.3 What was their data collection method(s)?
+# Q3.4 What was their main way to claim that they found a causal mechanism?
+# Q3.5 What was their main result? Does it answer the research question?
 
 
 
